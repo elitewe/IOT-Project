@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.connection.mapper.SearchMapper">
+    <insert id="insertDevice" useGeneratedKeys="true">
+        insert into device (name, type_id, role_id, protocol, add_time)
+        select #{formData.name}, B.id, A.id, #{formData.protocol}, now() from device_role A, device_type B
+        where A.role_name = #{formData.roleType} and B.type_name = #{formData.devType};
+    </insert>
+
+    <select id="searchMaxId" resultType="java.lang.Integer">
+        select last_insert_id();
+    </select>
+
+    <select id="getDeviceById" resultMap="com.example.connection.mapper.CommonMapper.Device">
+        select * from device where id = #{id};
+    </select>
+
+    <select id="getRoleNameById" resultType="java.lang.String">
+        select role_name from device_role where id = #{id};
+    </select>
+
+    <select id="getDeviceTypeById" resultType="java.lang.String">
+        select type_name from device_type where id = #{id};
+    </select>
+
+    <select id="getAllTopicWithClients" resultMap="com.example.connection.mapper.CommonMapper.SubscribedTopic">
+        select topic, group_concat(client_id) as clients from subscribed_topic group by topic;
+    </select>
+
+    <select id="getTopicsWithContentByClientId" resultMap="com.example.connection.mapper.CommonMapper.TopicContents">
+        select A.topic, group_concat(B.content) as contents
+        from subscribed_topic A
+        left join topic_content B on A.topic = B.topic
+        where A.client_id = #{id}
+        group by A.topic;
+    </select>
+
+    <select id="getPublicKey" resultType="java.lang.String">
+        select public_key from rsa;
+    </select>
+
+    <select id="getPrivateKey" resultType="java.lang.String">
+        select private_key from rsa;
+    </select>
+
+    <select id="getAllResource" resultMap="com.example.connection.mapper.CommonMapper.Resource">
+        select * from resource;
+    </select>
+
+    <select id="getAllDevices" resultMap="com.example.connection.mapper.CommonMapper.Device">
+        select * from device;
+    </select>
+
+    <select id="getAllDevRoles" resultMap="com.example.connection.mapper.CommonMapper.DevRole">
+        select * from device_role;
+    </select>
+
+    <select id="getAllDevTypes" resultMap="com.example.connection.mapper.CommonMapper.DevType">
+        select * from device_type;
+    </select>
+    
+    <select id="getAllWeathers" resultMap="com.example.connection.mapper.CommonMapper.Weather">
+        select * from weather;
+    </select>
+
+    <select id="getAllContentsByTopic" resultMap="com.example.connection.mapper.CommonMapper.ContentWithDate">
+        select content, add_time from topic_content where topic = #{topic};
+    </select>
+
+    <select id="getAllTopicsByClientId" resultType="java.lang.String">
+        select topic from subscribed_topic where client_id = #{id};
+    </select>
+</mapper>

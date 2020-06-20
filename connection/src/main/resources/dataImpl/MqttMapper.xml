@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.connection.mapper.MqttMapper">
+    <insert id="insertTopicWithClientId">
+        insert into subscribed_topic (client_id, topic) values (#{clientId}, #{topic});
+    </insert>
+
+    <insert id="insertContentWithTopic">
+        insert into topic_content (topic, content, add_time) values (#{topic}, #{content}, now());
+    </insert>
+</mapper>

@@ -1,0 +1,23 @@
+1.添加thymeleaf依赖使得controller方法返回到了指定的页面：https://blog.csdn.net/qq_35161328/article/details/93364230
+2.templates下的html引用static下的js 路径不需要加/static
+3.No serializer found for class...报错：https://blog.csdn.net/qq_39240270/article/details/88840574
+4.mapper.xml引用mapper.java的参数时需要在方法上加@Param
+5.修改数据库表对应还需要修改：mapper.xml、FormData、devicePO、deviceVO、index.js、index.html
+6.待插入的数据只有部分可以直接插入，另一部分需要进行转化：将直接可插入的数据添加到select语句内返回给insert，sql语句参考：
+insert into device (name, type_id, role_id, protocol, add_time)
+    select "first", B.id, A.id, "HTTP", now() from device_role A, device_type B
+    where A.role_name = "ROLE_USER" and B.type_name = "light";
+7.动态生成的元素绑定事件：https://blog.csdn.net/kelinfeng16/article/details/82989488
+8.setInterval周期性请求数据，暂时请求数据库，后期可以改为redis降低数据库的压力
+9.引入了bootstrap优化页面
+10.jquery跳转页面时给url带上参数可以传递给另一个js文件
+11.@GetMapping(value = {1, 2} )可以让一个方法匹配多个url
+12.取消表单默认提交行为：https://blog.csdn.net/whd526/article/details/78178451
+13.js注意拼接id
+14.对于HTTP和COAP、自定义协议，controller方法直接用String接收，再通过json解析器获得内容
+15.ajax url含有加号，get请求无法得到加号：https://www.cnblogs.com/crxis/p/9774188.html 原因：https://www.cnblogs.com/wintalen/archive/2011/04/27/2030058.html
+
+
+
+
+

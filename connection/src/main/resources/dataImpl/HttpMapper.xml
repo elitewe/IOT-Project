@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.connection.mapper.HttpMapper">
+    <insert id="insertContent">
+        insert into http_message (client_id, payload, protocol, url, add_time, message_id)
+        values (#{clientId}, #{payload}, #{protocol}, #{url}, now(), #{messageId});
+    </insert>
+    
+    <select id="getAllMessage" resultMap="com.example.connection.mapper.CommonMapper.HttpMessage">
+        select A.client_id, A.payload, A.protocol, A.url, A.add_time, B.type_name, C.name
+        from http_message A, device_type B, device C
+        where A.client_id = C.id and B.id = C.type_id;
+    </select>
+
+    <select id="getMessagesById" resultMap="com.example.connection.mapper.CommonMapper.Message">
+        select payload, add_time from http_message where client_id = #{id};
+    </select>
+</mapper>

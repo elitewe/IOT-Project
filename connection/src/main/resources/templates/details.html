@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/toastr.min.css">
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/details.js"></script>
+    <script type="text/javascript" src="/js/request.js"></script>
+    <script type="text/javascript" src="/js/coapParser.js"></script>
+    <script type="text/javascript" src="/js/jsencrypt.min.js"></script>
+    <script type="text/javascript" src="/js/toastr.min.js"></script>
+    <script type="text/javascript" src="/js/toastrOption.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form id="form1">
+        <fieldset>
+            <legend>设备类型:</legend>
+            权限：<input id="role" type="text" value="" disabled="disabled"><br>
+            协议类型: <input id="protocol" type="text" value="" disabled='disabled'><br>
+            添加时间: <input id="add_time" type="text" value="" disabled='disabled'><br>
+        </fieldset>
+    </form>
+
+    <form id="form2" hidden="hidden">
+        <fieldset>
+            <legend>已订阅主题:</legend>
+            <br><br><input type="text" id="input_topic" placeholder="请输入订阅主题">
+            <button id="subscribe" type="button">订阅</button>
+        </fieldset>
+    </form>
+
+    <form id="form3" hidden="hidden">
+        <fieldset>
+            <legend>上传:</legend>
+            <input type="text" id="input_param" placeholder="请输入上传参数">
+            <button id="upload" type="button">上传</button>
+        </fieldset>
+    </form>
+
+    <button id="get-type" class="get" type="button">获取设备类型</button>
+    <button id="get-weather" class="get" type="button">获取天气</button>
+
+</div>
+</body>
+</html>

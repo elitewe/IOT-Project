@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-table.css">
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/request.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table-zh-CN.js"></script>
+
+    <title>Title</title>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "GET",
+                url: "/search/device/all",
+                dataType: "json",
+                success: function (res) {
+
+                    // $("#table").bootstrapTable('load', msg);
+                    var arr = [];
+                    var list = res.detail;
+                    for (var i = 0; i < list.length; i++) {
+                        var obj = {};
+                        obj.id = list[i].id;
+                        obj.typeName = list[i].typeName;
+                        obj.protocol = list[i].protocol;
+                        obj.name = list[i].name;
+                        obj.button = '<button type="button">123</button>';
+                        arr.push(obj);
+                    }
+                    $('#table').bootstrapTable('load', arr);
+
+                },
+                error: function () {
+                    //alert("错误");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="margin: 50px;">
+        <table data-toggle="table" id="table" data-pagination="true">
+            <thead>
+            <tr>
+                <th data-field="id">id</th>
+                <th data-field="typeName">设备类型</th>
+                <th data-field="protocol">协议类型</th>
+                <th data-field="name">设备名</th>
+                <th data-field="button">按钮</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

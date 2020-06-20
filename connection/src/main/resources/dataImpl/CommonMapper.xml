@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.connection.mapper.CommonMapper">
+    <resultMap id="Device" type="com.example.connection.bean.po.DevicePO">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="type_id" property="typeId"></result>
+        <result column="role_id" property="roleId"></result>
+        <result column="protocol" property="protocol"></result>
+        <result column="add_time" property="addTime"></result>
+    </resultMap>
+    
+    <resultMap id="SubscribedTopic" type="com.example.connection.bean.TopicWithClient">
+        <result column="clients" property="clients"></result>
+        <result column="topic" property="topic"></result>
+    </resultMap>
+    
+    <resultMap id="TopicContents" type="com.example.connection.bean.TopicWithContent">
+        <result column="topic" property="topic"></result>
+        <result column="contents" property="contents"></result>
+    </resultMap>
+    
+    <resultMap id="HttpMessage" type="com.example.connection.bean.DevMessage">
+        <result column="client_id" property="clientId"></result>
+        <result column="payload" property="payload"></result>
+        <result column="protocol" property="protocol"></result>
+        <result column="url" property="url"></result>
+        <result column="add_time" property="addTime"></result>
+        <result column="type_name" property="devType"></result>
+        <result column="name" property="devName"></result>
+    </resultMap>
+
+    <resultMap id="Message" type="com.example.connection.bean.Message">
+        <result column="payload" property="payload"></result>
+        <result column="add_time" property="addTime"></result>
+    </resultMap>
+
+    <resultMap id="Resource" type="com.example.connection.bean.Resource">
+        <result column="id" property="id"></result>
+        <result column="url" property="url"></result>
+        <result column="roles" property="roles"></result>
+    </resultMap>
+
+    <resultMap id="DevRole" type="com.example.connection.bean.DevRole">
+        <result column="id" property="id"></result>
+        <result column="role_name" property="roleName"></result>
+    </resultMap>
+
+    <resultMap id="DevType" type="com.example.connection.bean.DevType">
+        <result column="id" property="id"></result>
+        <result column="type_name" property="typeName"></result>
+    </resultMap>
+
+    <resultMap id="Weather" type="com.example.connection.bean.Weather">
+        <result column="id" property="id"></result>
+        <result column="temperature" property="temperature"></result>
+        <result column="day_time" property="dayTime"></result>
+        <result column="climate" property="climate"></result>
+    </resultMap>
+
+    <resultMap id="ContentWithDate" type="com.example.connection.bean.ContentWithDate">
+        <result column="content" property="content"></result>
+        <result column="add_time" property="addTime"></result>
+    </resultMap>
+</mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/toastr.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-table.css">
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/application.js"></script>
+    <script type="text/javascript" src="/js/request.js"></script>
+    <script type="text/javascript" src="/js/toastr.min.js"></script>
+    <script type="text/javascript" src="/js/toastrOption.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table-zh-CN.js"></script>
+</head>
+<body>
+    <!--<p>设备订阅主题：</p>-->
+    <!--<div id="topic">-->
+
+    <!--</div>-->
+    <div id="topic" class="container" style="margin: 50px;">
+        <table data-toggle="table" id="table" data-pagination="true">
+            <thead>
+                <tr>
+                    <th data-field="topic">订阅主题</th>
+                    <th data-field="clients">相关订阅设备</th>
+                    <th data-field="content">待发布消息</th>
+                    <th data-field="buttonPost">操作1</th>
+                    <th data-field="buttonHistory">操作2</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
