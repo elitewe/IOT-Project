@@ -1,0 +1,11 @@
+INSERT INTO `subscribed_topic` VALUES (61, 'math');
+INSERT INTO `subscribed_topic` VALUES (61, 'music');
+INSERT INTO `subscribed_topic` VALUES (23, 'math');
+INSERT INTO `subscribed_topic` VALUES (24, 'music');
+INSERT INTO `subscribed_topic` VALUES (23, 'English');
+INSERT INTO `subscribed_topic` VALUES (22, 'math');
+INSERT INTO `subscribed_topic` VALUES (23, 'music');
+INSERT INTO `subscribed_topic` VALUES (62, '45');
+INSERT INTO `subscribed_topic` VALUES (61, 'English');
+INSERT INTO `subscribed_topic` VALUES (61, 'gaba');
+INSERT INTO `subscribed_topic` VALUES (61, 'pingpong');
