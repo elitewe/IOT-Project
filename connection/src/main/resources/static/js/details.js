@@ -4,6 +4,8 @@ var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCO3H+z8+MgYJH7S8S0WsLoXyW
 var list = ['topic1', 'topic2']; //topicWithContent
 
 $(function () {
+    toastr.options.timeOut = 5000;
+
     var str = window.location.search;
     var params = str.split('=');
     var clientId = params[1];
@@ -64,8 +66,16 @@ $(function () {
     });
 
     $('#upload').click(function () { //模拟发送http/coap报文
-        var data1 = {'A':'120'};
+        var data1 = {};
         var url = '/httpUpload?temperature=' + $('#input_param').val();
+
+        if ($('#input_param').val() != '') {
+            data1.temperature = $('#input_param').val();
+        }
+        if ($('#input_param2').val() != '') {
+            data1.warm = $('#input_param2').val();
+        }
+
         var request = "";
         if (protocol == 'HTTP') {
             request = postHttpRequest(url, data1);
@@ -101,9 +111,24 @@ $(function () {
         var method = e.target.id.split('-')[1];
         var request = '';
         if (method == 'type') {
-            request = coapRequest('/getDeviceTypeBy', {'id' : 12345}); //获取
+            if (protocol == 'COAP') {
+                request = coapRequest('/getDeviceTypeBy', {'id' : 12345}); //获取
+            } else {
+                request = getHttpRequest('/getDeviceTypeBy');
+            }
+
         } else if (method == 'weather') {
-            request = coapRequest('/getAllWeathers123')
+            if (protocol == 'COAP') {
+                request = coapRequest('/getAllWeathers')
+            } else {
+                request = getHttpRequest('/getAllWeathers');
+            }
+        } else if (method == 'core') {
+            if (protocol == 'COAP') {
+                request = coapRequest('/getAllCores')
+            } else {
+                request = getHttpRequest('/getAllCores');
+            }
         }
 
         var encRole = encRSA(roles);
@@ -113,9 +138,66 @@ $(function () {
            request,
            function (res) {
                var response = res.detail;
-               coapParse(response);
-               var d = Data;
-               alert(d.Payload); //打印payload的信息 todo 需要获取数据后添加到页面上
+
+               if(res.success) {
+                   if (method == 'weather') {
+                       var list = [];
+                       if (protocol == 'COAP') {
+                           coapParse(response);
+                           var d = Data;
+                           list = d.Payload.substring(1, d.Payload.length - 1).split(", ");
+                       } else {
+                           list = res.detail;
+                       }
+                       var info = "";
+                       for (var i = 0; i < list.length; i++) {
+                           var id;
+                           var temperature;
+                           var time;
+                           var climate;
+                           if (protocol == 'HTTP') {
+                               id = list[i].id;
+                               temperature = list[i].temperature;
+                               time = dateFormat("YYYY-mm-dd", new Date(list[i].dayTime));
+                               climate = list[i].climate;
+                           } else {
+                               var arr = list[i].split(":");
+                               id = arr[0].split("=")[1];
+                               temperature = arr[1].split("=")[1];
+                               time = dateFormat("YYYY-mm-dd", new Date(arr[2].split("=")[1]));
+                               climate = arr[5].split("=")[1];
+                           }
+                           info += "日期:" + time + " 温度:" + temperature + " 天气:" + climate + "<br>";
+                       }
+                       toastr.info(info);
+                   } else if (method == 'type') {
+                       if (protocol == 'HTTP') {
+                           toastr.info('设备类型：' + response);
+                       } else {
+                           coapParse(response);
+                           var d = Data;
+                           toastr.info('设备类型：' + d.Payload);
+                       }
+                   } else if (method == 'core') {
+                       if (protocol == 'HTTP') {
+                           var list = res.detail;
+                           var info = "";
+                           for (var i = 0; i < list.length; i++) {
+                               var warm = list[i].warm;
+                               var zwx = list[i].zwx;
+                               var day = dateFormat("YYYY-mm-dd", new Date(list[i].date));
+                               info += "日期:" + day + " 湿度:" + warm + " 紫外线指数:" + zwx + "<br>";
+                           }
+                           toastr.info(info);
+                       } else {
+                           coapParse(response);
+                           var d = Data;
+                       }
+                   }
+               } else {
+                   toastr.warning(res.msg); //没有权限
+               }
+
            },
            function (err) {
            }

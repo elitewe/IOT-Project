@@ -12,9 +12,11 @@
     <script type="text/javascript" src="/js/jsencrypt.min.js"></script>
     <script type="text/javascript" src="/js/toastr.min.js"></script>
     <script type="text/javascript" src="/js/toastrOption.js"></script>
+    <script type="text/javascript" src="/js/dateFormat.js"></script>
     <title>Title</title>
 </head>
 <body>
+<h2>设备详情</h2>
 <div class="container">
     <form id="form1">
         <fieldset>
@@ -36,13 +38,17 @@
     <form id="form3" hidden="hidden">
         <fieldset>
             <legend>上传:</legend>
-            <input type="text" id="input_param" placeholder="请输入上传参数">
+            <input type="text" id="input_param" placeholder="请输入上传的温度">
+            <input type="text" id="input_param2" placeholder="请输入上传的湿度">
             <button id="upload" type="button">上传</button>
         </fieldset>
+
+        <button id="get-type" class="get" type="button">获取设备类型</button>
+        <button id="get-weather" class="get" type="button">获取天气</button>
+        <button id="get-core" class="get" type="button">获取湿度&紫外线强度</button>
     </form>
 
-    <button id="get-type" class="get" type="button">获取设备类型</button>
-    <button id="get-weather" class="get" type="button">获取天气</button>
+
 
 </div>
 </body>

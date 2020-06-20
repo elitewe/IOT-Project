@@ -70,4 +70,8 @@
     <select id="getAllTopicsByClientId" resultType="java.lang.String">
         select topic from subscribed_topic where client_id = #{id};
     </select>
+
+    <select id="getAllCores" resultMap="com.example.connection.mapper.CommonMapper.Core">
+        select A.id, A.warm, A.zwx, B.day_time from core A, weather B where A.id = B.id;
+    </select>
 </mapper>

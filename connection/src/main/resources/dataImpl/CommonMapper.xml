@@ -62,4 +62,11 @@
         <result column="content" property="content"></result>
         <result column="add_time" property="addTime"></result>
     </resultMap>
+
+    <resultMap id="Core" type="com.example.connection.bean.Core">
+        <result column="id" property="id"></result>
+        <result column="warm" property="warm"></result>
+        <result column="zwx" property="zwx"></result>
+        <result column="day_time" property="date"></result>
+    </resultMap>
 </mapper>

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MqttMapper {
     int insertTopicWithClientId(String topic, int clientId);
 
-    int insertContentWithTopic(String content, String topic);
+    int insertContentWithTopic(String topic, String content);
 
 
 }

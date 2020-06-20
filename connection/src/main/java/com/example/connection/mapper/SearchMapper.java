@@ -41,4 +41,6 @@ public interface SearchMapper {
     //获取设备所有的订阅主题
     List<String> getAllTopicsByClientId(int id);
 
+    List<Core> getAllCores();
+
 }

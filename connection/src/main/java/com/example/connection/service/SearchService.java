@@ -120,6 +120,13 @@ public class SearchService {
         return result;
     }
 
+    public Result getAllCores() {
+        Result result = new Result();
+        result.setSuccess(true);
+        result.setDetail(searchMapper.getAllCores());
+        return result;
+    }
+
     public DeviceVO toVO(DevicePO devicePO) {
         String role = transRole(devicePO.getRoleId(), searchMapper.getAllDevRoles());
         String type = transType(devicePO.getTypeId(), searchMapper.getAllDevTypes());
@@ -147,6 +154,8 @@ public class SearchService {
     private boolean isRightProtocol(String protocol) {
         return protocol.equals("HTTP") || protocol.equals("MQTT") || protocol.equals("COAP");
     }
+
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.example.connection.service;
 
+import com.example.connection.bean.Core;
 import com.example.connection.bean.ProcessContent;
 import com.example.connection.bean.Result;
 import com.example.connection.bean.Weather;
@@ -35,10 +36,17 @@ public class CommonService {
                         Method method = type.getClass().getMethod(methodName + "Id", Integer.class);
                         String devType = (String)method.invoke(type, 1);
                         details = getDetails(devType, protocol, messageId);
+                        break;
                     case "getAllWeathers":
                         Method method1 = type.getClass().getMethod(methodName);
                         List<Weather> weatherList = (List<Weather>)method1.invoke(type);
                         details = getDetails(weatherList, protocol, messageId);
+                        break;
+                    case "getAllCores":
+                        Method method2 = type.getClass().getMethod(methodName);
+                        List<Core> coreList = (List<Core>)method2.invoke(type);
+                        details = getDetails(coreList, protocol, messageId);
+                        break;
                     default:
                         throw new MethodException("被调方法" + methodName + "不存在！");
 
